@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        google()
+        jcenter()
+        maven { url 'https://developer.huawei.com/repo/' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:3.5.3"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
+        classpath 'com.huawei.agconnect:agcp:1.4.1.300'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://jitpack.io' }
+        google()
+        jcenter()
+        maven { url 'https://developer.huawei.com/repo/' }
+
+        maven { url 'https://storage.googleapis.com/download.flutter.io' }
+
+        //url '/Users/xiedongdong/Documents/AndroidStudioProjects/module_components_flutter/build/host/outputs/repo'
+        String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+
+        maven {
+            url 'E:\\workspace\\module_components_flutter\\build\\host\\outputs\\repo'
+        }
+        maven {
+            url "$storageUrl/download.flutter.io"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

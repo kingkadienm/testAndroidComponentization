@@ -1,0 +1,87 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion androidConfig.compileSdkVersion
+    buildToolsVersion androidConfig.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion androidConfig.minSdkVersion
+        targetSdkVersion androidConfig.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "IS_MODULE", String.valueOf(rootProject.ext.isModule)
+        }
+
+        debug {
+            buildConfigField "boolean", "IS_MODULE", String.valueOf(rootProject.ext.isModule)
+        }
+
+        // Flutter profileImplementation
+        profile {
+            initWith debug
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/commons-lang-2.6.jar')
+    kapt dependenciesConfig.alibabaArouterCompiler
+    api dependenciesConfig.alibababArouter
+    api dependenciesConfig.kotlin
+    api dependenciesConfig.junit
+    api dependenciesConfig.runner
+    api dependenciesConfig.design
+    api dependenciesConfig.constraintLayout
+    api dependenciesConfig.swiperefreshlayout
+    api dependenciesConfig.rxandroid
+    api dependenciesConfig.rxjava
+    api dependenciesConfig.retrofit
+    api dependenciesConfig.retrofitRxjavaAdapter
+    api dependenciesConfig.retrofit2ConverterGson
+    api dependenciesConfig.okhttp
+    api dependenciesConfig.rxlifecycle
+    api dependenciesConfig.rxbinding
+    api dependenciesConfig.eventbus
+    api dependenciesConfig.gson
+    api dependenciesConfig.toast
+    api dependenciesConfig.recyclerViewAdapter
+    api dependenciesConfig.glide
+
+    // Flutter AAR 本地repo集成
+    debugImplementation 'com.xingzhi.android.biz.module_components_flutter:flutter_debug:1.0'
+    profileImplementation 'com.xingzhi.android.biz.module_components_flutter:flutter_profile:1.0'
+    releaseImplementation 'com.xingzhi.android.biz.module_components_flutter:flutter_release:1.0'
+
+    // Flutter AAR Maven集成
+//    debugImplementation "com.xingzhi.android.biz.module_components_flutter:flutter_debug:${FLUTTER_MODULE_VSERION}"
+//    profileImplementation "com.xingzhi.android.biz.module_components_flutter:flutter_profile:${FLUTTER_MODULE_VSERION}"
+//    releaseImplementation "com.xingzhi.android.biz.module_components_flutter:flutter_release:${FLUTTER_MODULE_VSERION}"
+}

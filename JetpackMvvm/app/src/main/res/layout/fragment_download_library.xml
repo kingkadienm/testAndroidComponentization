@@ -6,7 +6,7 @@
 
         <variable
             name="click"
-            type="me.hgj.jetpackmvvm.demo.ui.fragment.demo.DownLoadLibraryFragment.ProxyClick" />
+            type="com.wangzs.jetpackmvvm.demo.ui.fragment.demo.DownLoadLibraryFragment.ProxyClick" />
     </data>
 
     <LinearLayout

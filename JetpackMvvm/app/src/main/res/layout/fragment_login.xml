@@ -6,11 +6,11 @@
 
         <variable
             name="viewmodel"
-            type="me.hgj.jetpackmvvm.demo.viewmodel.state.LoginRegisterViewModel" />
+            type="com.wangzs.jetpackmvvm.demo.viewmodel.state.LoginRegisterViewModel" />
 
         <variable
             name="click"
-            type="me.hgj.jetpackmvvm.demo.ui.fragment.login.LoginFragment.ProxyClick" />
+            type="com.wangzs.jetpackmvvm.demo.ui.fragment.login.LoginFragment.ProxyClick" />
 
     </data>
 
